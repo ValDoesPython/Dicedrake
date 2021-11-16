@@ -3,7 +3,6 @@ import random
 import string
 import math
 import sqlite3 as lite
-UandP = "UandP.txt"
 con=lite.connect('Dicedrake.db')
 cur=con.cursor()
 def diceroll():
@@ -26,7 +25,7 @@ def diceroll():
     if x =='y':
         main()
     if x == 'n':
-        exit()
+        mainMenu()
 def statroll():
     arrStats=[0,0,0,0,0,0]
     for i in range (6):
@@ -38,6 +37,7 @@ def statroll():
         stat=arrRoll[0]+arrRoll[1]+arrRoll[2]
         arrStats[i-1]=stat
     print (arrStats)
+    return arrStats
 def statrollheroic():
     arrStats=[0,0,0,0,0,0]
     for i in range (6):
@@ -49,6 +49,7 @@ def statrollheroic():
         stat=arrRoll[0]+arrRoll[1]+arrRoll[2]
         arrStats[i-1]=stat
     print (arrStats)
+    return arrStats
 
 def createFolder(directory):
     try:
@@ -63,66 +64,67 @@ def createAccount():
     global password
     password = input("What would you like your password to be?")
     os.mkdir('./'+username+'/')
-    f = open(UandP, 'a+')
-    f.write(username+", ")
-    f.write(password+"\n")
-    f.close()
-    cur.execute("INSERT INTO Accounts (Username, Password) values (?, ?)",
+    cur.execute("INSERT INTO Accounts (Username, Password) VALUES (?, ?)",
             (username, password))
     con.commit()
-
+    
 
 def logIn():
-    f = open("UandP.txt", "r")
-    names=[line.strip() for line in open('UandP.txt')]
+
     global username
     username = input("Username:")
     password = input("Password:")
-    UFound = False
     PFound = False
-    for n in names:
-        UFound = False
-        PFound = False
-        x = n.split(', ')
-        if x[0] ==username:
-            UFound = True
-        if x[1] == password:
+    for x in cur.execute("SELECT Password FROM Accounts WHERE Username='"+(username)+"'"):
+        if x[0]== password:
             PFound = True
-        if UFound == True and PFound == True:
-            print("Logged in!")
-            characterCreator()
-    if UFound == False or PFound == False:
+    if PFound == True:
+        print("Logged in!")
+        mainMenu()
+    if PFound == False:
         print("Wrong!")
 
 def startUp():
     SorL = input("Would you like to sign in [S] or log in [L] now?")
     if SorL == 'S'or SorL == 's':
         createAccount()
-        logIn()
     if SorL == 'L'or SorL == 'l':
         logIn()
 
 def characterCreator():
-    actionCS = str(input("Would you like to create [C], view [V] or edit [E] a character?"))
-    if actionCS == 'c' or actionCS == 'C':
-        CName = input("What is your character's name? ")
-        Race = input("What is your character's race? ")
-        numClass = int(input("How man classes does your character have? "))
-        abilityScores = [10,10,10,10,10,10]
-        c1 = charInfo(CName,Race,numClass,abilityScores)
-        for i in range(c1.noclass):
-            className = input("What is your class? ")
-            classLevel = int(input("What level is your class? "))
-            c1.add_class([className, classLevel])
-        Prof = c1.proficiencybonus()
-
-        #c1 = charInfo(CName,Race,numClass,abilityScores)
-        dirName = (username+'/'+CName)
-        os.makedirs(dirName)
-        f = open(username+'/'+CName+'/'+CName+'sheetp1.txt', 'x')
-
+    CName = input("What is your character's name? ")
+    Race = input("What is your character's race? ")
+    numClass = int(input("How man classes does your character have? "))
+    abilityScores =statroll()
+    c1 = charInfo(CName,Race,numClass,abilityScores)
+    for i in range(c1.noclass):
+        className = input("What is your class? ")
+        classLevel = int(input("What level is your class? "))
+        c1.add_class([className, classLevel])
+    Prof = c1.proficiencybonus()
+    dirName = (username+'/'+CName)
+    os.makedirs(dirName)
+    f = open(username+'/'+CName+'/'+CName+'sheetp1.txt', 'x')
+'''def characterEditor():
+def characterViewer():'''
 def gameBoard():
-    #I am not sure where to go from here, personally I want to get it on a working board but chances are it will not.
-    quit()
+    diceroll()
+    mainMenu()
+def mainMenu():
+    actionCS = str(input('''Main Menu:
+                            Create new character [C]
+                            View existing characters[V]
+                            Edit a character[E]
+                            Open virtual tabletop [P]
+                            Quit[Q]'''))
+    if actionCS == 'c' or actionCS == 'C':
+        characterCreator()
+    if actionCS == 'v' or actionCS == 'V':
+        print("in progress")
+    if actionCS == 'e' or actionCS == 'E':
+        print("in progress")
+    if actionCS == 'p' or actionCS == 'P':
+        gameBoard()
+    if actionCS == 'q' or actionCS == 'Q':
+        quit()
 startUp()
-
