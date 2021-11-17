@@ -1,6 +1,6 @@
-#Dicedrake
+# Dicedrake
 
-##What we aim to achieve
+## What we aim to achieve
 
 Dicedrake will someday become the tool for those Dungeons and Dragons players who have had enough of half baked virtual tools. We want, in the longrun, to create a tool that people can use to connect with eachother through the game, indiscriminate of what you may or may not have content wise. 
 
@@ -8,10 +8,10 @@ I started playing Dungeons and Dragons in the december of twenty twenty, and sin
 
 currently this doubles as a school project, but in time I hope to go from a complete prototype to a version that people can enjoy.
 
-##Plans along the way
+## Plans along the way
 
-I have met many different and diverse people while playing, leading me to discover just how vast the range of needs this community has, and as a result, seeing the many oversights on distribution giants such as roll 20 and dnd beyond in reguards to accessability for players. especially in reguards to vision impairment which is what I have aimed this project to aid with. while beimg designed for everyonem, it will be targeted at those that previous software forgot to consider in thier development.
+I have met many different and diverse people while playing, leading me to discover just how vast the range of needs this community has, and as a result, seeing the many oversights on distribution giants such as roll 20 and dnd beyond in reguards to accessability for players. especially in reguards to vision impairment which is what I have aimed this project to aid with. while beimg designed for everyone, it will be targeted at those that previous software forgot to consider in thier development.
 
-currnetly, as of 11/15/2021, I only have some barebones functions that I have coded in python, some of which have to be edited and made more efficient, but in time, I am working to create a beautiful program wiht multiple layers of customisation in built, character sheet designer and tracker, dice roller and in the longterm development, virtual tabletop integration.
+currnetly, as of 11/15/2021, I only have some barebones functions that I have coded in python, some of which have to be edited and made more efficient, but in time, I am working to create a beautiful program with multiple layers of customisation in built, character sheet designer and tracker, dice roller and in the longterm development, virtual tabletop integration.
 
 -Valentine
