@@ -5,27 +5,34 @@ import math
 import sqlite3 as lite
 con=lite.connect('Dicedrake.db')
 cur=con.cursor()
+#setting up the connection to the associated database for all of the stored information reguarding accounts and content that need be accessed.
 def diceroll():
     y = str(input("What would you like to roll? (No spaces, eg:1d20): "))
     x = y.split('+')
     total = 0
+    index=0
     for d in x:
-        subtotal = 0
-        n = d.split('d')
-        numb = int(n[0])
-        max = int(n[1])
-        lodice = []
-        for i in range(numb):
-            num = random.randint(1,max)
-            subtotal += num
-        
+
+        if 'd' in x[index]:
+            subtotal = 0
+            n = d.split('d')
+            numb = int(n[0])
+            max = int(n[1])
+            for i in range(numb):
+                num = random.randint(1,max)
+                subtotal += num
+                print(num)
+        else:
+            subtotal=int(x[index])
         total += subtotal
+        index += 1
     print(total)
     x = input("REDO?")
     if x =='y':
         main()
     if x == 'n':
         mainMenu()
+#this will be accessed via the virtual tabletop. my aim is to create a separate gui for it. 
 def statroll():
     arrStats=[0,0,0,0,0,0]
     for i in range (6):
@@ -38,6 +45,7 @@ def statroll():
         arrStats[i-1]=stat
     print (arrStats)
     return arrStats
+#this is for the players that wish to allow lower stat scores in their game, with the lowest possible being a score of three, a massive handicap
 def statrollheroic():
     arrStats=[0,0,0,0,0,0]
     for i in range (6):
@@ -50,14 +58,14 @@ def statrollheroic():
         arrStats[i-1]=stat
     print (arrStats)
     return arrStats
-
+#this is the exact same as statroll() however it limits the handicap provided to unlucky players by not allowing ones.
 def createFolder(directory):
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
     except OSError:
         print ('Error: Creating directory. ' +  directory)
-
+#creates a directory for each user on that client
 def createAccount():
     global username
     username = input("What would you like your username to be?")
@@ -67,10 +75,8 @@ def createAccount():
     cur.execute("INSERT INTO Accounts (Username, Password) VALUES (?, ?)",
             (username, password))
     con.commit()
-    
-
+ #writes an account for a new user
 def logIn():
-
     global username
     username = input("Username:")
     password = input("Password:")
@@ -83,14 +89,14 @@ def logIn():
         mainMenu()
     if PFound == False:
         print("Wrong!")
-
+#allows people to log in through the database
 def startUp():
     SorL = input("Would you like to sign in [S] or log in [L] now?")
     if SorL == 'S'or SorL == 's':
         createAccount()
     if SorL == 'L'or SorL == 'l':
         logIn()
-
+#boots the program
 def characterCreator():
     CName = input("What is your character's name? ")
     Race = input("What is your character's race? ")
@@ -105,8 +111,10 @@ def characterCreator():
     dirName = (username+'/'+CName)
     os.makedirs(dirName)
     f = open(username+'/'+CName+'/'+CName+'sheetp1.txt', 'x')
-'''def characterEditor():
-def characterViewer():'''
+def characterEditor():
+    print ("section incomplete")
+def characterViewer():
+    print ("section incomplete")
 def gameBoard():
     diceroll()
     mainMenu()
