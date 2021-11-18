@@ -89,7 +89,8 @@ def logIn():
         mainMenu()
     if PFound == False:
         print("Wrong!")
-#allows people to log in through the database
+        startup()
+#allows people to log in through the database. if they get it wrong they get sent back to the startup menu
 def startUp():
     SorL = input("Would you like to sign in [S] or log in [L] now?")
     if SorL == 'S'or SorL == 's':
@@ -111,10 +112,14 @@ def characterCreator():
     dirName = (username+'/'+CName)
     os.makedirs(dirName)
     f = open(username+'/'+CName+'/'+CName+'sheetp1.txt', 'x')
+    mainMenu()
+    #for creating characters, still a work in progress but I am working on it
 def characterEditor():
     print ("section incomplete")
+    mainMenu()
 def characterViewer():
     print ("section incomplete")
+    mainMenu()
 def gameBoard():
     diceroll()
     mainMenu()
@@ -135,4 +140,5 @@ def mainMenu():
         gameBoard()
     if actionCS == 'q' or actionCS == 'Q':
         quit()
+    #the main menu
 startUp()
