@@ -1992,6 +1992,7 @@ class Ui_MainWindow(QMainWindow):
         self.Charselect.currentIndexChanged['QString'].connect(self.editorgrid.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def confirm_Stats():
+	CharClass= self.comboBox_21.gettext()
 	querie= "INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES ("+username+","+Charactername_6+","+Strengthscore_5+","+dexterityscore_5+","+constitutionscore_5+","+inteligencescore_5+","+wisdomscrore_5+","+charismascore_5+","+Profs+","+Exps+","+Saves+","+CharClass)
 	con1=lite.connect('Dicedrake.db')
         cur1=con1.cursor()
@@ -2001,90 +2002,90 @@ class Ui_MainWindow(QMainWindow):
         con1.close()
     
    
-	def strength_checked():
+	def strength_checked(self):
 		self.Saves = Saves+"strength, "
-	def dexterity_checked():
+	def dexterity_checked(self):
 		self.Saves = Saves+"dexterity, "
-	def constitution_checked():
+	def constitution_checked(self):
 		self.Saves = Saves+"constitution, "
-	def inteligence_checked():
+	def inteligence_checked(self):
 		self.Saves = Saves+"inteligence, "
-	def wisdom_checked():
+	def wisdom_checked(self):
 		self.Saves = Saves+"wisdom, "
-	def charisma_checked():
+	def charisma_checked(self):
 		self.Saves = Saves+"charisma, "
 
-	def expSur_checked():
+	def expSur_checked(self):
 		self.Expa = Exps+"survival, "
-	def expStl_checked():
+	def expStl_checked(self):
 		self.Expa = Exps+"stealth, "
-	def expSOH_checked():
+	def expSOH_checked(self):
 		self.Expa = Exps+"slight of hand, "
-	def expRel_checked():
+	def expRel_checked(self):
 		self.Expa = Exps+"religion,"
-	def expPers_checked():
+	def expPers_checked(self):
 		self.Expa = Exps+"persuasion, "
-	def expPerf_checked():
+	def expPerf_checked(self):
 		self.Expa = Exps+"performance, "
-	def expPerc_checked():
+	def expPerc_checked(self):
 		self.Expa = Exps+"perception, "
-	def expNat_checked():
+	def expNat_checked(self):
 		self.Expa = Exps+"nature, "
-	def ExpMed_checked():
+	def ExpMed_checked(self):
 		self.Expa = Exps+"medicine, "
-	def expInv_checked():
+	def expInv_checked(self):
 		self.Expa = Exps+"investigation, "
-	def expInt_checked():
+	def expInt_checked(self):
 		self.Expa = Exps+"intimidation, "
-	def expIns_checked():
+	def expIns_checked(self):
 		self.Expa = Exps+"insight, "
-	def expHist_checked():
+	def expHist_checked(self):
 		self.Expa = Exps+"history, "
-	def expDec_checked():
+	def expDec_checked(self):
 		self.Expa = Exps+"deception, "
-	def expAth_checked():
+	def expAth_checked(self):
 		self.Expa = Exps+"athletics, "
-	def expArc_checked():
+	def expArc_checked(self):
 		self.Expa = Exps+"arcana, "
-	def expAH_checked():
+	def expAH_checked(self):
 		self.Expa = Exps+"animal handling, "
-	def expAcro_checked():
+	def expAcro_checked(self):
 		self.Expa = Exps+"acrobatics, "
-	def proSOH__checked():
+	def proSOH__checked(self):
 		self.Profs = Profs+"slight of hand, "
-	def percRel_checked():
+	def percRel_checked(self):
 		self.Profs = Profs+"religion, "
-	def profSur_checked():
+	def profSur_checked(self):
 		self.Profs = Profs+"survival, "
-	def profStl_checked():
+	def profStl_checked(self):
 		self.Profs = Profs+"stealth, "
-	def profPers_checked():
+	def profPers_checked(self):
 		self.Profs = Profs+"persuasion, "
-	def profPerf_checked():
+	def profPerf_checked(self):
 		self.Profs = Profs+"performance, "
-	def profPerc_checked():
+	def profPerc_checked(self):
 		self.Profs = Profs+"perception, "
-	def profNat_checked():
+	def profNat_checked(self):
 		self.Profs = Profs+"nature, "
-	def profMed_checked():
+	def profMed_checked(self):
 		self.Profs = Profs+"medicine, "
-	def profInv_checked():
+	def profInv_checked(self):
 		self.Profs = Profs+"investigation, "
-	def profInt_checked():
+	def profInt_checked(self):
 		self.Profs = Profs+"intimidation, "
-	def profIns_checked():
+	def profIns_checked(self):
 		self.Profs = Profs+"insight, "
-	def profHist_checked():
+	def profHist_checked(self):
 		self.Profs = Profs+"history, "
-	def profDec_checked():
+	def profDec_checked(self):
 	self.Profs = Profs+"deception, "
-	def profAth_checked():
+	def profAth_checked(self):
 		self.Profs = Profs+"athletics, "
-	def profArc_checked():
+	def profArc_checked(self):
 		self.Profs = Profs+"arcana, "
-	def profAH_checked():
+	def profAH_checked(self):
 		self.Profs = Profs+"animal handling, "
-	def profAcro_checked():
+	def profAcro_checked(self):
 		self.Profs = Profs+"acrobatics, "
         
     def retranslateUi(self, MainWindow):
