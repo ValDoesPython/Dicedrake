@@ -1992,9 +1992,14 @@ class Ui_MainWindow(QMainWindow):
         self.Charselect.currentIndexChanged['QString'].connect(self.editorgrid.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def confirm_Stats():
-        #"INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
-  #(Username, Charactername_6, Strengthscore_5, dexterityscore_5, constitutionscore_5, inteligencescore_5, wisdomscrore_5, charismascore_5, Profs, Exps, Saves, CharClass)
-    #GO HERE FOR QUERIE
+	querie= "INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES ("+username+","+Charactername_6+","+Strengthscore_5+","+dexterityscore_5+","+constitutionscore_5+","+inteligencescore_5+","+wisdomscrore_5+","+charismascore_5+","+Profs+","+Exps+","+Saves+","+CharClass)
+	con1=lite.connect('Dicedrake.db')
+        cur1=con1.cursor()
+        cur1.execute(querie)
+        con1.commit()
+        cur1.close()
+        con1.close()
+    
    
 	def strength_checked():
 		self.Saves = Saves+"strength, "
@@ -2319,18 +2324,18 @@ class Ui_MainWindow(QMainWindow):
         self.expSur_3.setText(_translate("MainWindow", "Expertice"))
         self.survivalButton_3.setText(_translate("MainWindow", "PushButton"))
         self.strSaveProf_5.clicked.connect(self.strength_checked)
-	    self.radioButton_7.clicked.connect(self.dexterity_checked)
-	    self.ConSaveprof_5.clicked.connect(self.constitution_checked)
-	    self.IntSaveprof_5.clicked.connect(self.inteligence_checked)
-	    self.WisSaveprof_5.clicked.connect(self.wisdom_checked)
-	    self.ChaSaveprof_5.clicked.connect(self.charisma_checked)
-	    self.profAcro_5.clicked.connect(self.profAcro_checked)
-	    self.expAcro_5.clicked.connect(self.expAcro_checked)
-	    self.profAH_5.clicked.connect(self.profAH_checked)
-	    self.expAH_5.clicked.connect(self.expAH_checked)
-	    self.profArc_5.clicked.connect(self.profArc_checked)
-	    self.expArc_5.clicked.connect(self.expArc_checked)
-	    self.profAth_5.clicked.connect(self.profAth_checked)
+	self.radioButton_7.clicked.connect(self.dexterity_checked)
+	self.ConSaveprof_5.clicked.connect(self.constitution_checked)
+	self.IntSaveprof_5.clicked.connect(self.inteligence_checked)
+	self.WisSaveprof_5.clicked.connect(self.wisdom_checked)
+	self.ChaSaveprof_5.clicked.connect(self.charisma_checked)
+	self.profAcro_5.clicked.connect(self.profAcro_checked)
+	self.expAcro_5.clicked.connect(self.expAcro_checked)
+	self.profAH_5.clicked.connect(self.profAH_checked)
+	self.expAH_5.clicked.connect(self.expAH_checked)
+	self.profArc_5.clicked.connect(self.profArc_checked)
+	self.expArc_5.clicked.connect(self.expArc_checked)
+	self.profAth_5.clicked.connect(self.profAth_checked)
     	self.expAth_5.clicked.connect(self.expAth_checked)
     	self.profDec_5.clicked.connect(self.profDec_checked)
     	self.expDec_5.clicked.connect(self.expDec_checked)
@@ -2339,23 +2344,23 @@ class Ui_MainWindow(QMainWindow):
     	self.profIns_5.clicked.connect(self.profIns_checked)
     	self.expIns_5.clicked.connect(self.expIns_checked)
     	self.profInt_5.clicked.connect(self.profInt_checked)
-	    self.expInt_5.clicked.connect(self.expInt_checked)
+	self.expInt_5.clicked.connect(self.expInt_checked)
     	self.profInv_5.clicked.connect(self.profInv_checked)
     	self.expInv_5.clicked.connect(self.expInv_checked)
     	self.profMed_5.clicked.connect(self.profMed_checked)
-	    self.ExpMed_5.clicked.connect(self.ExpMed_checked)
+	self.ExpMed_5.clicked.connect(self.ExpMed_checked)
     	self.profNat_5.clicked.connect(self.profNat_checked)
     	self.expNat_5.clicked.connect(self.expNat_checked)
-	    self.profPerc_5.clicked.connect(self.profPerc_checked)
-	    self.expPerc_5.clicked.connect(self.expPerc_checked)
+	self.profPerc_5.clicked.connect(self.profPerc_checked)
+	self.expPerc_5.clicked.connect(self.expPerc_checked)
     	self.profPerf_5.clicked.connect(self.profPerf_checked)
     	self.expPerf_5.clicked.connect(self.expPerf_checked)
     	self.profPers_5.clicked.connect(self.profPers_checked)
     	self.expPers_5.clicked.connect(self.expPers_checked)
     	self.percRel_9.clicked.connect(self.percRel_checked)
-	    self.percRel_10.clicked.connect(self.expRel_checked)
-	    self.proSOH_5.clicked.connect(self.proSOH__checked)
-	    self.expSOH_5.clicked.connect(self.expSOH_checked)
+	self.percRel_10.clicked.connect(self.expRel_checked)
+	self.proSOH_5.clicked.connect(self.proSOH__checked)
+	self.expSOH_5.clicked.connect(self.expSOH_checked)
     	self.profStl_5.clicked.connect(self.profStl_checked)
     	self.expStl_5.clicked.connect(self.expStl_checked)
     	self.profSur_5.clicked.connect(self.profSur_checked)
@@ -2629,6 +2634,7 @@ class Ui_Form(QMainWindow):
                     print(' user and password found')
             if PFound == True:
                 print("Logged in!")
+		global username
                 self.switch_window.emit(["Login"])
             if PFound == False:
                 print("Wrong!")
@@ -2638,6 +2644,7 @@ class Ui_Form(QMainWindow):
             print('loop ignored or incorrect password or username')
             cur1.close()
             con1.close()
+	
             
         
         
