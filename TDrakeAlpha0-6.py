@@ -32,7 +32,7 @@ class Ui_MainWindow(QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(2719, 1065)
+        MainWindow.resize(1920, 1080)
         MainWindow.setStyleSheet("*{\n"
 "   border:none;\n"
 "    color: white;\n"
