@@ -12,7 +12,9 @@ class Ui_MainWindow(QMainWindow):
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.setupUi(self)
         self.oldPos = self.pos()
-        
+        self.Exps= ""
+        self.Profs= ""
+        self.Saves= ""
     def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
@@ -30,7 +32,7 @@ class Ui_MainWindow(QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(2719, 1065)
+        MainWindow.resize(1920, 1080)
         MainWindow.setStyleSheet("*{\n"
 "   border:none;\n"
 "    color: white;\n"
@@ -491,7 +493,7 @@ class Ui_MainWindow(QMainWindow):
         self.label_60 = QtWidgets.QLabel(self.frame_171)
         self.label_60.setObjectName("label_60")
         self.gridLayout_28.addWidget(self.label_60, 6, 1, 1, 1)
-        self.pushButton_5 = QtWidgets.QPushButton(self.frame_171)
+        self.pushButton_5 = QtWidgets.QPushButton(self.frame_171, self.confirm_Stats)
         icon16 = QtGui.QIcon()
         icon16.addPixmap(QtGui.QPixmap(":/icons/lock.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_5.setIcon(icon16)
@@ -1989,7 +1991,103 @@ class Ui_MainWindow(QMainWindow):
         self.Quit.clicked['bool'].connect(MainWindow.close)
         self.Charselect.currentIndexChanged['QString'].connect(self.editorgrid.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+    def confirm_Stats():
+	CharClass= self.comboBox_21.gettext()
+	querie= "INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);"
+	con1=lite.connect('Dicedrake.db')
+        cur1=con1.cursor()
+        cur1.execute(querie, (username,Charactername_6,Strengthscore_5,dexterityscore_5,constitutionscore_5,inteligencescore_5,wisdomscrore_5,charismascore_5,Profs,Exps,Saves,CharClass))
+        con1.commit()
+        cur1.close()
+        con1.close()
+    
+   
+	def strength_checked(self):
+		self.Saves = Saves+"strength, "
+	def dexterity_checked(self):
+		self.Saves = Saves+"dexterity, "
+	def constitution_checked(self):
+		self.Saves = Saves+"constitution, "
+	def inteligence_checked(self):
+		self.Saves = Saves+"inteligence, "
+	def wisdom_checked(self):
+		self.Saves = Saves+"wisdom, "
+	def charisma_checked(self):
+		self.Saves = Saves+"charisma, "
 
+	def expSur_checked(self):
+		self.Expa = Exps+"survival, "
+	def expStl_checked(self):
+		self.Expa = Exps+"stealth, "
+	def expSOH_checked(self):
+		self.Expa = Exps+"slight of hand, "
+	def expRel_checked(self):
+		self.Expa = Exps+"religion,"
+	def expPers_checked(self):
+		self.Expa = Exps+"persuasion, "
+	def expPerf_checked(self):
+		self.Expa = Exps+"performance, "
+	def expPerc_checked(self):
+		self.Expa = Exps+"perception, "
+	def expNat_checked(self):
+		self.Expa = Exps+"nature, "
+	def ExpMed_checked(self):
+		self.Expa = Exps+"medicine, "
+	def expInv_checked(self):
+		self.Expa = Exps+"investigation, "
+	def expInt_checked(self):
+		self.Expa = Exps+"intimidation, "
+	def expIns_checked(self):
+		self.Expa = Exps+"insight, "
+	def expHist_checked(self):
+		self.Expa = Exps+"history, "
+	def expDec_checked(self):
+		self.Expa = Exps+"deception, "
+	def expAth_checked(self):
+		self.Expa = Exps+"athletics, "
+	def expArc_checked(self):
+		self.Expa = Exps+"arcana, "
+	def expAH_checked(self):
+		self.Expa = Exps+"animal handling, "
+	def expAcro_checked(self):
+		self.Expa = Exps+"acrobatics, "
+	def proSOH__checked(self):
+		self.Profs = Profs+"slight of hand, "
+	def percRel_checked(self):
+		self.Profs = Profs+"religion, "
+	def profSur_checked(self):
+		self.Profs = Profs+"survival, "
+	def profStl_checked(self):
+		self.Profs = Profs+"stealth, "
+	def profPers_checked(self):
+		self.Profs = Profs+"persuasion, "
+	def profPerf_checked(self):
+		self.Profs = Profs+"performance, "
+	def profPerc_checked(self):
+		self.Profs = Profs+"perception, "
+	def profNat_checked(self):
+		self.Profs = Profs+"nature, "
+	def profMed_checked(self):
+		self.Profs = Profs+"medicine, "
+	def profInv_checked(self):
+		self.Profs = Profs+"investigation, "
+	def profInt_checked(self):
+		self.Profs = Profs+"intimidation, "
+	def profIns_checked(self):
+		self.Profs = Profs+"insight, "
+	def profHist_checked(self):
+		self.Profs = Profs+"history, "
+	def profDec_checked(self):
+	self.Profs = Profs+"deception, "
+	def profAth_checked(self):
+		self.Profs = Profs+"athletics, "
+	def profArc_checked(self):
+		self.Profs = Profs+"arcana, "
+	def profAH_checked(self):
+		self.Profs = Profs+"animal handling, "
+	def profAcro_checked(self):
+		self.Profs = Profs+"acrobatics, "
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -2226,12 +2324,54 @@ class Ui_MainWindow(QMainWindow):
         self.survival_3.setText(_translate("MainWindow", "Survival"))
         self.expSur_3.setText(_translate("MainWindow", "Expertice"))
         self.survivalButton_3.setText(_translate("MainWindow", "PushButton"))
+        self.strSaveProf_5.clicked.connect(self.strength_checked)
+	self.radioButton_7.clicked.connect(self.dexterity_checked)
+	self.ConSaveprof_5.clicked.connect(self.constitution_checked)
+	self.IntSaveprof_5.clicked.connect(self.inteligence_checked)
+	self.WisSaveprof_5.clicked.connect(self.wisdom_checked)
+	self.ChaSaveprof_5.clicked.connect(self.charisma_checked)
+	self.profAcro_5.clicked.connect(self.profAcro_checked)
+	self.expAcro_5.clicked.connect(self.expAcro_checked)
+	self.profAH_5.clicked.connect(self.profAH_checked)
+	self.expAH_5.clicked.connect(self.expAH_checked)
+	self.profArc_5.clicked.connect(self.profArc_checked)
+	self.expArc_5.clicked.connect(self.expArc_checked)
+	self.profAth_5.clicked.connect(self.profAth_checked)
+    	self.expAth_5.clicked.connect(self.expAth_checked)
+    	self.profDec_5.clicked.connect(self.profDec_checked)
+    	self.expDec_5.clicked.connect(self.expDec_checked)
+       	self.profHist_5.clicked.connect(self.profHist_checked)
+    	self.expHist_5.clicked.connect(self.expHist_checked)
+    	self.profIns_5.clicked.connect(self.profIns_checked)
+    	self.expIns_5.clicked.connect(self.expIns_checked)
+    	self.profInt_5.clicked.connect(self.profInt_checked)
+	self.expInt_5.clicked.connect(self.expInt_checked)
+    	self.profInv_5.clicked.connect(self.profInv_checked)
+    	self.expInv_5.clicked.connect(self.expInv_checked)
+    	self.profMed_5.clicked.connect(self.profMed_checked)
+	self.ExpMed_5.clicked.connect(self.ExpMed_checked)
+    	self.profNat_5.clicked.connect(self.profNat_checked)
+    	self.expNat_5.clicked.connect(self.expNat_checked)
+	self.profPerc_5.clicked.connect(self.profPerc_checked)
+	self.expPerc_5.clicked.connect(self.expPerc_checked)
+    	self.profPerf_5.clicked.connect(self.profPerf_checked)
+    	self.expPerf_5.clicked.connect(self.expPerf_checked)
+    	self.profPers_5.clicked.connect(self.profPers_checked)
+    	self.expPers_5.clicked.connect(self.expPers_checked)
+    	self.percRel_9.clicked.connect(self.percRel_checked)
+	self.percRel_10.clicked.connect(self.expRel_checked)
+	self.proSOH_5.clicked.connect(self.proSOH__checked)
+	self.expSOH_5.clicked.connect(self.expSOH_checked)
+    	self.profStl_5.clicked.connect(self.profStl_checked)
+    	self.expStl_5.clicked.connect(self.expStl_checked)
+    	self.profSur_5.clicked.connect(self.profSur_checked)
+    	self.expSur_5.clicked.connect(self.expSur_checked)
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.stats_3), _translate("MainWindow", "Stats"))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.features_3), _translate("MainWindow", "Features"))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.invontory_3), _translate("MainWindow", "Inventory"))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.spells_3), _translate("MainWindow", "Spells"))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.Journal_3), _translate("MainWindow", "Journal"))
-        self.VersionNo.setText(_translate("MainWindow", "Dicedrake PreAlpha1.05"))
+        self.VersionNo.setText(_translate("MainWindow", "Dicedrake PreAlpha1.06"))
 
 
 
@@ -2488,13 +2628,14 @@ class Ui_Form(QMainWindow):
         tries=0
         while PFound == False and tries != 3:
             print('entered while')
-            for x in cur1.execute("SELECT Password FROM Accounts WHERE Username='"+(username)+"'"):
+            for x in cur1.execute("SELECT Password FROM Accounts WHERE Username=?", username):
                 print('entered for')
                 if x[0]== password:
                     PFound = True
                     print(' user and password found')
             if PFound == True:
                 print("Logged in!")
+		global username
                 self.switch_window.emit(["Login"])
             if PFound == False:
                 print("Wrong!")
@@ -2504,6 +2645,7 @@ class Ui_Form(QMainWindow):
             print('loop ignored or incorrect password or username')
             cur1.close()
             con1.close()
+	
             
         
         
