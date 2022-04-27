@@ -1993,10 +1993,10 @@ class Ui_MainWindow(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def confirm_Stats():
 	CharClass= self.comboBox_21.gettext()
-	querie= "INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES ("+username+","+Charactername_6+","+Strengthscore_5+","+dexterityscore_5+","+constitutionscore_5+","+inteligencescore_5+","+wisdomscrore_5+","+charismascore_5+","+Profs+","+Exps+","+Saves+","+CharClass)
+	querie= "INSERT INTO Characters (player,charname,strength,dexterity,constitution,inteligence,wisdom,charisma,proficiencies,Expertice,saves,Class) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);"
 	con1=lite.connect('Dicedrake.db')
         cur1=con1.cursor()
-        cur1.execute(querie)
+        cur1.execute(querie, (username,Charactername_6,Strengthscore_5,dexterityscore_5,constitutionscore_5,inteligencescore_5,wisdomscrore_5,charismascore_5,Profs,Exps,Saves,CharClass))
         con1.commit()
         cur1.close()
         con1.close()
@@ -2628,7 +2628,7 @@ class Ui_Form(QMainWindow):
         tries=0
         while PFound == False and tries != 3:
             print('entered while')
-            for x in cur1.execute("SELECT Password FROM Accounts WHERE Username='"+(username)+"'"):
+            for x in cur1.execute("SELECT Password FROM Accounts WHERE Username=?", username):
                 print('entered for')
                 if x[0]== password:
                     PFound = True
